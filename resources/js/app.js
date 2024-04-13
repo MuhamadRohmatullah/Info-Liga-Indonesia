@@ -9,6 +9,7 @@ import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import {routes} from './routes';
 import store from './store';
+import vuetify from './vuetify';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -46,4 +47,5 @@ app.component('example-component', ExampleComponent);
 
 app.use(router);
 app.use(store);
+app.use(vuetify);
 app.mount('#app');
