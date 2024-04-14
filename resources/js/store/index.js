@@ -7,7 +7,8 @@ export default createStore({
         note : "",
         jadwal : {},
         news : {},
-       
+        matchday : {},
+        nextmatch : {}
     },
     getters:{
         getNote(state){
@@ -18,6 +19,12 @@ export default createStore({
         },
         getBerita(state){
             return state.news;
+        },
+        getMatch(state){
+            return state.matchday;
+        },
+        getNextMatch(state){
+            return state.nextmatch;
         }
     },
     actions:{
@@ -31,6 +38,14 @@ export default createStore({
          getNews: async(context)=>{
             let response = await axios.get('https://ligaindonesia-api.vercel.app/api/v1/news');
             context.commit('ADD_NEWS', response.data);
+         },
+         getSchedule: async(context)=>{
+            let response = await axios.get('https://ligaindonesia-api.vercel.app/api/v1/matchday');
+            context.commit('ADD_SCHEDULE', response.data);
+         },
+         getNext: async(context)=>{
+            let response = await axios.get('https://ligaindonesia-api.vercel.app/api/v1/nextmatch');
+            context.commit('ADD_NEXTSCHEDULE', response.data);
          }
     },
     mutations:{
@@ -44,6 +59,12 @@ export default createStore({
         ADD_NEWS(state, payload){
             state.news = payload.data;
             console.log(state.news[0]);
+        },
+        ADD_SCHEDULE(state, payload){
+            state.matchday = payload.data;
+        },
+        ADD_NEXTSCHEDULE(state, payload){
+            state.nextmatch = payload.data;
         }
     }
 
