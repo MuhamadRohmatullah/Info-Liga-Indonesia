@@ -10,6 +10,7 @@ export default createStore({
         matchday : {},
         nextmatch : {},
         teams : {},
+        club : {}
     },
     getters:{
         getNote(state){
@@ -29,6 +30,9 @@ export default createStore({
         },
         getTeams(state){
             return state.teams;
+        },
+        getClub(state){
+            return state.club;
         }
     },
     actions:{
@@ -54,6 +58,10 @@ export default createStore({
          getTeam: async(context)=>{
             let response = await axios.get('https://ligaindonesia-api.vercel.app/api/v1/teams');
             context.commit('ADD_TEAM', response.data);
+         },
+         getClub: async(context, payload)=>{
+            let response = await axios.get('https://ligaindonesia-api.vercel.app/api/v1/team/profile/'+payload);
+            context.commit('ADD_CLUB', response.data);
          }
     },
     mutations:{
@@ -77,6 +85,10 @@ export default createStore({
         ADD_TEAM(state, payload){
             state.teams = payload.data;
             console.log(state.teams)
+        },
+        ADD_CLUB(state, payload){
+            state.club = payload.data;
+            console.log(state.club)
         }
     }
 
