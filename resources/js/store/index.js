@@ -5,7 +5,9 @@ export default createStore({
 
     state:{
         note : "",
-        jadwal : {}
+        jadwal : {},
+        news : {},
+       
     },
     getters:{
         getNote(state){
@@ -13,6 +15,9 @@ export default createStore({
         },
         getJad(state){
             return state.jadwal;
+        },
+        getBerita(state){
+            return state.news;
         }
     },
     actions:{
@@ -22,6 +27,10 @@ export default createStore({
          getJadwal: async(context)=>{
             let response = await axios.get('https://ligaindonesia-api.vercel.app/api/v1/standings');
             context.commit('ADD_JADWAL', response.data);
+         },
+         getNews: async(context)=>{
+            let response = await axios.get('https://ligaindonesia-api.vercel.app/api/v1/news');
+            context.commit('ADD_NEWS', response.data);
          }
     },
     mutations:{
@@ -31,6 +40,10 @@ export default createStore({
         ADD_JADWAL(state, payload){
             state.jadwal = payload.data;
             console.log(state.jadwal);
+        },
+        ADD_NEWS(state, payload){
+            state.news = payload.data;
+            console.log(state.news[0]);
         }
     }
 
