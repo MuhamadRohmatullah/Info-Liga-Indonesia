@@ -8,7 +8,8 @@ export default createStore({
         jadwal : {},
         news : {},
         matchday : {},
-        nextmatch : {}
+        nextmatch : {},
+        teams : {},
     },
     getters:{
         getNote(state){
@@ -25,6 +26,9 @@ export default createStore({
         },
         getNextMatch(state){
             return state.nextmatch;
+        },
+        getTeams(state){
+            return state.teams;
         }
     },
     actions:{
@@ -46,6 +50,10 @@ export default createStore({
          getNext: async(context)=>{
             let response = await axios.get('https://ligaindonesia-api.vercel.app/api/v1/nextmatch');
             context.commit('ADD_NEXTSCHEDULE', response.data);
+         },
+         getTeam: async(context)=>{
+            let response = await axios.get('https://ligaindonesia-api.vercel.app/api/v1/teams');
+            context.commit('ADD_TEAM', response.data);
          }
     },
     mutations:{
@@ -65,6 +73,10 @@ export default createStore({
         },
         ADD_NEXTSCHEDULE(state, payload){
             state.nextmatch = payload.data;
+        },
+        ADD_TEAM(state, payload){
+            state.teams = payload.data;
+            console.log(state.teams)
         }
     }
 
