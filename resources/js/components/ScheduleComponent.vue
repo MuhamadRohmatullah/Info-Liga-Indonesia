@@ -16,7 +16,24 @@
       </div>
     </div>
   </div>
-  
+  <div class="row justify-content-center mt-4 mb-2">
+    <div class="col-8 mt-1" v-for="(elmn, index) in nextmatch" :key="index">
+      <div
+        class="card p-2 shadow text-center mb-0"
+        style="width : 100%, border : none"
+      >
+        <h5 class="fw-bold">{{ elmn.date }}</h5>
+        <h5 v-if="elmn.date">Pekan {{ elmn.gameweek }}</h5>
+        <h5>{{ elmn.time }}</h5>
+        <h5 v-if="elmn.home_club" class="fw-bold">
+          {{ elmn.home_club }} {{ elmn.score }} {{ elmn.away_club }}
+        </h5>
+        <h5 v-if="elmn.venue">
+          <v-icon icon="mdi-map-marker" />{{ elmn.venue }}
+        </h5>
+      </div>
+    </div>
+  </div>
 </template>
 <script setup>
 import headerComponent from "./HeaderComponent.vue";
@@ -30,9 +47,13 @@ const match = computed(() => {
   return store.getters.getMatch;
 });
 
+const nextmatch = computed(() => {
+  return store.getters.getNextMatch;
+});
 
 onBeforeMount(() => {
   store.dispatch("getSchedule");
+  store.dispatch("getNext");
 });
 </script>
 <style scoped>
