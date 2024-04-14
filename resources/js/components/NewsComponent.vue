@@ -15,7 +15,23 @@
         </a>
       </div>
     </div>
-  
+    <div class="row text-end mt-0">
+      <h5>
+        <router-link to="/allNews" class="lainnya"
+          >Berita Lainnya >></router-link
+        >
+      </h5>
+    </div>
+    <a :href="news[0].url" class="link">
+      <div class="card mb-1">
+        <div class="card-body text-center">
+          <img :src="imgrl" alt="gambar" style="width: 25%" />
+        </div>
+        <div class="card-title text-center">
+          <h5 class="fw-bold">{{ news[0].title }}</h5>
+        </div>
+      </div>
+    </a>
   </div>
 </template>
 <script setup>
