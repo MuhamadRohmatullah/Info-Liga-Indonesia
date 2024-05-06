@@ -3,6 +3,7 @@ Program menampilkan informasi sepakbola liga 1 indonesia, nemapilkan klasemen ko
 data - data yang ditampilkan diambil dari api dengan menggunakan axios.
 
 Program ini dibuat dengan menggunakan :
+- laravel 10
 - vue 3
 - vue router
 - vuex
